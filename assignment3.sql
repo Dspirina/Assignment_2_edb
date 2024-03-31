@@ -83,5 +83,27 @@ WHERE id NOT IN (
          ) AS subquery
 );
 
+# EXISTS with correlated subqueries result
+UPDATE books
+SET price = price * 1.1
+WHERE EXISTS (
+    SELECT 1
+    FROM books_authors
+             INNER JOIN authors ON books_authors.author_id = authors.id
+    WHERE books_authors.book_id = books.id
+      AND authors.name_au = 'Stephen King'
+);
+
+# NOT EXISTS with correlated subqueries result
+DELETE FROM customers
+WHERE NOT EXISTS (
+    SELECT 1
+    FROM loans
+    WHERE loans.customer_id = customers.id
+);
+
+
+
+
 
 -- (for idea brainstorming for queries used Internet)
