@@ -9,10 +9,15 @@ WHERE publisher_id = (
 SELECT * FROM books;
 
 -- IN with non-correlated subqueries result
-DELETE FROM loans
-WHERE due_date < CURDATE() AND return_date IS NULL;
+DELETE loans
+WHERE id IN (
+    SELECT id
+    FROM loans
+    WHERE due_date < CURDATE() AND return_date IS NULL
+);
 
-SELECT * from loans;
+SELECT id from loans;
+
 
 -- NOT IN with non-correlated subqueries result
 SELECT *
