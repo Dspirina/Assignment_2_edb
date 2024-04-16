@@ -1,4 +1,6 @@
-﻿-- with non-correlated subqueries result
+﻿USE librarydb;
+
+-- with non-correlated subqueries result
 UPDATE books
 SET price = price * 1.10
 WHERE publisher_id = (
@@ -6,7 +8,7 @@ WHERE publisher_id = (
     FROM publishers
     WHERE name_pub = 'Penguin Random House'
 );
-SELECT * FROM books;
+SELECT price FROM books;
 
 -- IN with non-correlated subqueries result
 DELETE loans
@@ -20,7 +22,7 @@ SELECT id from loans;
 
 
 -- NOT IN with non-correlated subqueries result
-SELECT *
+SELECT name
 FROM customers
 WHERE id NOT IN (
     SELECT DISTINCT customer_id
@@ -39,7 +41,7 @@ WHERE EXISTS (
       AND authors.name_au = 'Stephen King'
 );
 
-SELECT * from books;
+SELECT price from books;
 
 -- NOT EXISTS with non-correlated subqueries result (delete customers who didn't borrow anything)
 DELETE FROM customers
@@ -68,6 +70,7 @@ WHERE book_id IN (
              FROM loans
              WHERE return_date IS NOT NULL
          ) AS subquery
+
 );
 
 
@@ -112,3 +115,8 @@ WHERE NOT EXISTS (
 
 
 -- (for idea brainstorming for queries used Internet)
+
+
+
+
+
