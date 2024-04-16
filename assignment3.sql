@@ -115,3 +115,8 @@ WHERE NOT EXISTS (
 
 
 -- (for idea brainstorming for queries used Internet)
+
+
+
+
+
