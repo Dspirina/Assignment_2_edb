@@ -70,6 +70,7 @@ WHERE book_id IN (
              FROM loans
              WHERE return_date IS NOT NULL
          ) AS subquery
+
 );
 
 
