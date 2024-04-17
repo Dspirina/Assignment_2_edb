@@ -12,13 +12,13 @@ SELECT
     DATEDIFF(loans.due_date, loans.loan_date) AS days_to_end_term
 FROM
     loans 
-        INNER JOIN
+        LEFT JOIN
     books  ON loans.book_id = books.id
-        INNER JOIN
-    books_authors  ON books.id = books_authors.book_id
-        INNER JOIN
-    authors  ON books_authors.author_id = authors.id
-        INNER JOIN
+        LEFT JOIN
+    books_authors  ON books.id = books_authors.books_id
+       LEFT JOIN
+    authors  ON books_authors.authors_id = authors.id
+        LEFT JOIN
     publishers  ON books.publisher_id = publishers.id
 WHERE
     loans.return_date IS NULL
@@ -26,6 +26,7 @@ GROUP BY
     loans.id;
 
 
-SELECT title, authors, publisher_info, loan_date, days_to_end_term FROM librarydb.rented_books_view;
+SELECT title, authors, publisher_info, loan_date, days_to_end_term FROM rented_books_view;
 
 
+select * from books;
